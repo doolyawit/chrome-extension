@@ -8,11 +8,16 @@ inputBtn.addEventListener("click", function () {
   // when click input button
   myLeads.push(inputEl.value); // insert input field data into array
   renderLeads(); // call show output function
+  inputEl.value = ""; // clear input field
 });
 function renderLeads() {
   let listItems = ""; // set list (of links) blank every loop
   for (i = 0; i < myLeads.length; i++) {
-    listItems += "<li>" + myLeads[i] + "</li> "; // create li tag for each link
+    listItems += `<li>
+        <a href="https://${myLeads[i]}"target='_blank'>
+        ${myLeads[i]}
+        </a>
+    </li> `; // create li tag for each link
     //Another way
     //   1.create element
     //   const li = document.createElement("li");
