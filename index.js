@@ -3,6 +3,7 @@ const inputBtn = document.getElementById("input-btn"); //  input button
 const inputEl = document.getElementById("input-el"); // input field
 const ulEl = document.getElementById("ul-el"); // ul list for outout
 const deleteBtn = document.getElementById("delete-btn"); // delete button
+const tabBtn = document.getElementById("tab-btn"); // save tab button
 let myLeads = []; // array for store links
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads")); // get localstorage data
 
@@ -12,12 +13,13 @@ if (leadsFromLocalStorage) {
   myLeads = leadsFromLocalStorage; // set to array for send to renderLeads();
   render(myLeads); // render it out
 }
+
 //----Show output----
 function render(leads) {
   let listItems = ""; // set list (of links) blank every loop
   for (i = 0; i < leads.length; i++) {
     listItems += `<li>
-          <a href="https://${leads[i]}"target='_blank'>
+          <a href="${leads[i]}"target='_blank'>
           ${leads[i]}
           </a>
       </li> `; // create li tag for each link
@@ -39,6 +41,16 @@ inputBtn.addEventListener("click", function () {
   inputEl.value = ""; // clear input field
   localStorage.setItem("myLeads", JSON.stringify(myLeads)); // store in local storage (convert array --> string)
   render(myLeads); // call show output function
+});
+
+//----Click Save Tab----
+tabBtn.addEventListener("click", function () {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    // chrome api to get current url
+    myLeads.push(tabs[0].url); // push current url to array
+    localStorage.setItem("myLeads", JSON.stringify(myLeads)); // store in local storage (convert array --> string)
+    render(myLeads); // call show output function
+  });
 });
 
 // ----Click Delete All----
