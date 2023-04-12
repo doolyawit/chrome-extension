@@ -1,17 +1,17 @@
 // ----Variable----
 const inputBtn = document.getElementById("input-btn"); //  input button
-const inputEl = document.getElementById("input-el"); // input field
-const ulEl = document.getElementById("ul-el"); // ul list for outout
+const inputEl = document.getElementById("input-el"); // input field (box)
+const ulEl = document.getElementById("ul-el"); // ul list for outout (container)
 const deleteBtn = document.getElementById("delete-btn"); // delete button
 const tabBtn = document.getElementById("tab-btn"); // save tab button
-let myLeads = []; // array for store links
-const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads")); // get localstorage data
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads")); // get localstorage data [string --> array]
+let myLeads = []; // array for store leads(links)
 
 // ----In case we refresh page ( have data already , not first time use)----
 if (leadsFromLocalStorage) {
   // check if have previous local data
   myLeads = leadsFromLocalStorage; // set to array for send to renderLeads();
-  render(myLeads); // render it out
+  render(myLeads); // render local storage data
 }
 
 //----Show output----
@@ -31,7 +31,7 @@ function render(leads) {
     //   3. append to ul
     //   ulEl.append(li);
   }
-  ulEl.innerHTML = listItems; // add li tag to ul
+  ulEl.innerHTML = listItems; // add li tag to ul (container)
 }
 
 // ----Click Save----
